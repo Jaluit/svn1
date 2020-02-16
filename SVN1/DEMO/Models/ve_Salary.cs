@@ -12,13 +12,14 @@ namespace DEMO.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TypeCodes
+    public partial class ve_Salary
     {
-        public short Inum { get; set; }
-        public string TypeCode { get; set; }
-        public string TypeName { get; set; }
-        public string Memo { get; set; }
-        public string DetailCode { get; set; }
-        public string DetailName { get; set; }
+        public short ID { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public Nullable<int> OverOffHours { get; set; }
+        public Nullable<int> PrivateOffHours { get; set; }
+        public Nullable<int> WelfareOffHours { get; set; }
+        public Nullable<int> BasicSalary { get; set; }
     }
 }

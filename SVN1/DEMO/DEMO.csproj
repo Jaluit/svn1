@@ -168,7 +168,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Library\Salary.cs" />
+    <Compile Include="Library\SalaryService.cs" />
     <Compile Include="Models\Demo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -192,6 +192,9 @@
       <DependentUpon>Demo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeCodes.cs">
+      <DependentUpon>Demo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ve_Salary.cs">
       <DependentUpon>Demo.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

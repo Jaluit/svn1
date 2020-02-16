@@ -24,10 +24,25 @@
     <EntitySetMapping Name="TypeCodes">
       <EntityTypeMapping TypeName="DEMOModel.TypeCodes">
         <MappingFragment StoreEntitySet="TypeCodes">
+          <ScalarProperty Name="DetailName" ColumnName="DetailName" />
+          <ScalarProperty Name="DetailCode" ColumnName="DetailCode" />
           <ScalarProperty Name="Memo" ColumnName="Memo" />
           <ScalarProperty Name="TypeName" ColumnName="TypeName" />
           <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
           <ScalarProperty Name="Inum" ColumnName="Inum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ve_Salary">
+      <EntityTypeMapping TypeName="DEMOModel.ve_Salary">
+        <MappingFragment StoreEntitySet="ve_Salary">
+          <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+          <ScalarProperty Name="WelfareOffHours" ColumnName="WelfareOffHours" />
+          <ScalarProperty Name="PrivateOffHours" ColumnName="PrivateOffHours" />
+          <ScalarProperty Name="OverOffHours" ColumnName="OverOffHours" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

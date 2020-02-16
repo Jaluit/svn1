@@ -28,5 +28,6 @@ namespace DEMO.Models
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Schedule> Schedule { get; set; }
         public virtual DbSet<TypeCodes> TypeCodes { get; set; }
+        public virtual DbSet<ve_Salary> ve_Salary { get; set; }
     }
 }

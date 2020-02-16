@@ -6,7 +6,7 @@
     </Key>
     <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="10" />
-    <Property Name="Category" Type="char" MaxLength="1" />
+    <Property Name="Category" Type="char" MaxLength="2" />
     <Property Name="Salary" Type="int" />
   </EntityType>
   <EntityType Name="Schedule">
@@ -25,11 +25,38 @@
     <Property Name="Inum" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TypeCode" Type="varchar" MaxLength="2" />
     <Property Name="TypeName" Type="nvarchar" MaxLength="20" />
+    <Property Name="DetailCode" Type="varchar" MaxLength="2" />
+    <Property Name="DetailName" Type="nvarchar" MaxLength="20" />
     <Property Name="Memo" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'DEMO.dbo.ve_Salary' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="ve_Salary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="10" />
+    <Property Name="Category" Type="nvarchar" MaxLength="20" />
+    <Property Name="OverOffHours" Type="int" />
+    <Property Name="PrivateOffHours" Type="int" />
+    <Property Name="WelfareOffHours" Type="int" />
+    <Property Name="BasicSalary" Type="int" />
   </EntityType>
   <EntityContainer Name="DEMOModelStoreContainer">
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TypeCodes" EntityType="Self.TypeCodes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ve_Salary" EntityType="Self.ve_Salary" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ve_Salary].[ID] AS [ID], 
+    [ve_Salary].[Name] AS [Name], 
+    [ve_Salary].[Category] AS [Category], 
+    [ve_Salary].[OverOffHours] AS [OverOffHours], 
+    [ve_Salary].[PrivateOffHours] AS [PrivateOffHours], 
+    [ve_Salary].[WelfareOffHours] AS [WelfareOffHours], 
+    [ve_Salary].[BasicSalary] AS [BasicSalary]
+    FROM [dbo].[ve_Salary] AS [ve_Salary]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
 </Schema>

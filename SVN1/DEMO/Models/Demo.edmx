@@ -11,7 +11,7 @@
           </Key>
           <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="10" />
-          <Property Name="Category" Type="char" MaxLength="1" />
+          <Property Name="Category" Type="char" MaxLength="2" />
           <Property Name="Salary" Type="int" />
         </EntityType>
         <EntityType Name="Schedule">
@@ -30,12 +30,39 @@
           <Property Name="Inum" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeCode" Type="varchar" MaxLength="2" />
           <Property Name="TypeName" Type="nvarchar" MaxLength="20" />
+          <Property Name="DetailCode" Type="varchar" MaxLength="2" />
+          <Property Name="DetailName" Type="nvarchar" MaxLength="20" />
           <Property Name="Memo" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'DEMO.dbo.ve_Salary' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="ve_Salary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" />
+          <Property Name="Category" Type="nvarchar" MaxLength="20" />
+          <Property Name="OverOffHours" Type="int" />
+          <Property Name="PrivateOffHours" Type="int" />
+          <Property Name="WelfareOffHours" Type="int" />
+          <Property Name="BasicSalary" Type="int" />
         </EntityType>
         <EntityContainer Name="DEMOModelStoreContainer">
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeCodes" EntityType="Self.TypeCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ve_Salary" EntityType="Self.ve_Salary" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ve_Salary].[ID] AS [ID], 
+    [ve_Salary].[Name] AS [Name], 
+    [ve_Salary].[Category] AS [Category], 
+    [ve_Salary].[OverOffHours] AS [OverOffHours], 
+    [ve_Salary].[PrivateOffHours] AS [PrivateOffHours], 
+    [ve_Salary].[WelfareOffHours] AS [WelfareOffHours], 
+    [ve_Salary].[BasicSalary] AS [BasicSalary]
+    FROM [dbo].[ve_Salary] AS [ve_Salary]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -47,7 +74,7 @@
           </Key>
           <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Category" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Category" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="Salary" Type="Int32" />
         </EntityType>
         <EntityType Name="Schedule">
@@ -63,6 +90,7 @@
           <EntitySet Name="Employee" EntityType="Self.Employee" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" />
           <EntitySet Name="TypeCodes" EntityType="DEMOModel.TypeCodes" />
+          <EntitySet Name="ve_Salary" EntityType="DEMOModel.ve_Salary" />
         </EntityContainer>
         <EntityType Name="TypeCodes">
           <Key>
@@ -72,6 +100,20 @@
           <Property Name="TypeCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="TypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Memo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DetailCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DetailName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ve_Salary">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OverOffHours" Type="Int32" />
+          <Property Name="PrivateOffHours" Type="Int32" />
+          <Property Name="WelfareOffHours" Type="Int32" />
+          <Property Name="BasicSalary" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -102,10 +144,25 @@
           <EntitySetMapping Name="TypeCodes">
             <EntityTypeMapping TypeName="DEMOModel.TypeCodes">
               <MappingFragment StoreEntitySet="TypeCodes">
+                <ScalarProperty Name="DetailName" ColumnName="DetailName" />
+                <ScalarProperty Name="DetailCode" ColumnName="DetailCode" />
                 <ScalarProperty Name="Memo" ColumnName="Memo" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
                 <ScalarProperty Name="Inum" ColumnName="Inum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ve_Salary">
+            <EntityTypeMapping TypeName="DEMOModel.ve_Salary">
+              <MappingFragment StoreEntitySet="ve_Salary">
+                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+                <ScalarProperty Name="WelfareOffHours" ColumnName="WelfareOffHours" />
+                <ScalarProperty Name="PrivateOffHours" ColumnName="PrivateOffHours" />
+                <ScalarProperty Name="OverOffHours" ColumnName="OverOffHours" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

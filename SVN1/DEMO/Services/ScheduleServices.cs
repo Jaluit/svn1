@@ -1,4 +1,5 @@
-﻿using DEMO.Models;
+﻿using DEMO.Library;
+using DEMO.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,5 +47,45 @@ namespace DEMO.Services
             var s = Db.SaveChanges();
       
         }
+
+
+        public static List<SalaryViewModels> getSalary(short id)
+        {
+            var schedule = Db.ve_Salary.Select(a => a);
+            
+                    schedule = schedule.Where(x => x.ID == id);
+ 
+  
+                 
+
+            List<SalaryViewModels> Salary = new List<SalaryViewModels>();
+
+            foreach (ve_Salary tmp in schedule.ToList())
+            {
+                SalaryService SC = new SalaryService(new SalaryFormula());
+
+                if(tmp.Category == "主管")
+                    SC = new SalaryService(new BossSalaryFormula());
+
+                Salary.Add(new SalaryViewModels
+                {
+                    ID = tmp.ID,
+                    Name = tmp.Name,
+                    BasicSalary = tmp.BasicSalary,
+                    Category = tmp.Category,
+                    OverOffHours = tmp.OverOffHours,
+                    PrivateOffHours = tmp.PrivateOffHours,
+                    WelfareOffHours = tmp.WelfareOffHours,
+                    getSalary = (int)SC.Calculate((int)tmp.BasicSalary, (int)tmp.PrivateOffHours, (int)tmp.OverOffHours)
+
+                 });
+            }
+            
+
+
+            return Salary.ToList();
+        }
+
+
     }
 }

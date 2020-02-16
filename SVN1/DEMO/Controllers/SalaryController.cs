@@ -23,6 +23,11 @@ namespace DEMO.Controllers
             return ScheduleServices.sel();
         }
 
+        public List<SalaryViewModels> GetSalary(short id)
+        {  
+            return ScheduleServices.getSalary(id);
+        }
+
         public void Post(Schedule schedule)
         {
             ScheduleServices.ins(schedule);

@@ -1,4 +1,5 @@
 ﻿using DEMO.Models;
+using DEMO.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,30 @@ namespace DEMO.Controllers
     public class SalaryController : ApiController
     {
  
-        public IEnumerable<string> Get()
+        public List<Schedule> Get()
         {
-            return new string[] { "value1", "value2" };
+            //Schedule schedule = new Schedule();
+            //schedule.Inum = 1;
+            //schedule.Hours = 23;
+            //schedule.Type = "2";
+            //ScheduleServices.upd(schedule);
+           
+            return ScheduleServices.sel();
+        }
+
+        public void Post(Schedule schedule)
+        {
+            ScheduleServices.ins(schedule);
+        }
+
+        public void Put(Schedule schedule)
+        {
+            ScheduleServices.upd(schedule);
+        }
+
+        public void Delete(int id)
+        {
+            ScheduleServices.del(id);
         }
     }
 }

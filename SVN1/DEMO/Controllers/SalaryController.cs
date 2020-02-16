@@ -15,11 +15,11 @@ namespace DEMO.Controllers
         public List<Schedule> Get()
         {
             //Schedule schedule = new Schedule();
-            //schedule.Inum = 1;
+            //schedule.Inum = 2;
             //schedule.Hours = 23;
             //schedule.Type = "2";
-            //ScheduleServices.upd(schedule);
-           
+            //ScheduleServices.del(schedule.Inum);
+   
             return ScheduleServices.sel();
         }
 

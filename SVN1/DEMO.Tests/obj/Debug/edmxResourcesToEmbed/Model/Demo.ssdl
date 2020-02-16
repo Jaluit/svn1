@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DEMOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="10" />
+    <Property Name="Category" Type="char" MaxLength="1" />
+    <Property Name="Salary" Type="int" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="Inum" />
+    </Key>
+    <Property Name="Inum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="smallint" Nullable="false" />
+    <Property Name="Type" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Hours" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeCodes">
+    <Key>
+      <PropertyRef Name="Inum" />
+    </Key>
+    <Property Name="Inum" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeCode" Type="varchar" MaxLength="2" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="20" />
+    <Property Name="Memo" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityContainer Name="DEMOModelStoreContainer">
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeCodes" EntityType="Self.TypeCodes" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
